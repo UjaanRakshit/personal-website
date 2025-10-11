@@ -36,9 +36,9 @@ export default function Portfolio() {  const projects = [
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-transparent to-blue-500/20"></div>
+      {/* Subtle color overlay for consistency */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-pink-900/10 animate-gradient"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-12">        {/* Back button */}

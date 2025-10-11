@@ -6,10 +6,12 @@ import Link from 'next/link';
 export default function About() {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-purple-500/20"></div>
-      </div>      <div className="relative z-10 container mx-auto px-6 py-8 max-h-screen overflow-y-auto">
+      {/* Subtle color overlay for consistency */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-pink-900/10 animate-gradient"></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 py-8 max-h-screen overflow-y-auto">
         {/* Back button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

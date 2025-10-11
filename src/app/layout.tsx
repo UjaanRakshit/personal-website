@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import DynamicBackground from "@/components/DynamicBackground";
+import GridBackground from "@/components/GridBackground";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} antialiased`}
       >
+        <GridBackground />
         <DynamicBackground />
         {children}
       </body>
