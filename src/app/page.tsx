@@ -105,7 +105,7 @@ export default function Home() {
             { name: 'About Me', href: '/about' },
             { name: 'Portfolio', href: '/portfolio' },
             { name: 'Skills', href: '/skills' },
-            { name: 'Resume', href: '/Resume2108.pdf' }
+            { name: 'Resume', href: '/Ujaan_Rakshit_Resume.pdf' }
           ].map((item, index) => (
             <motion.div
               key={item.name}
@@ -156,7 +156,7 @@ export default function Home() {
               >
                 <div className="flex space-x-6">
                   <motion.a
-                    href="mailto:ujaanrakshit@gmail.coms"
+                    href="mailto:ujaanrakshit@gmail.com"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 }}
