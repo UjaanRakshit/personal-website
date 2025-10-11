@@ -52,9 +52,22 @@ export default function Home() {
 
   return (
     <div className="h-screen bg-black text-white relative overflow-hidden flex flex-col">
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
+      {/* Dynamic Animated Background */}
+      <div className="absolute inset-0">
+        {/* Animated gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-pink-900/10 animate-gradient"></div>
+        <div className="absolute inset-0 bg-gradient-to-tl from-cyan-900/10 via-transparent to-indigo-900/10 animate-gradient-reverse"></div>
+        
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl animate-float-slow"></div>
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
       </div>
 
       {/* Main content - always present - Full height container */}
@@ -137,7 +150,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.4, delay: 0.8 }}
+            transition={{ duration: 0.3, delay: 0.4 }}
             className="flex flex-col items-center"
           >
             {!showContactButtons ? (
@@ -214,7 +227,7 @@ export default function Home() {
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={showContent ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
         >
           <p className="text-gray-500 text-sm">© Ujaan Rakshit 2025</p>
         </motion.div>
