@@ -96,8 +96,8 @@ function LinkIcon({ href, size = 14 }: { href: string; size?: number }) {
 function ProjectRow({ project }: { project: Project }) {
   const inner = (
     <>
-      <div className="flex items-baseline justify-between gap-4 mb-0.5">
-        <h3 className="text-[15px] tracking-tight inline-flex items-center gap-1.5">
+      <div className="flex items-baseline justify-between gap-4 mb-1">
+        <h3 className="inline-flex items-center gap-2">
           <span className="relative">
             {project.name}
             <span
@@ -114,13 +114,17 @@ function ProjectRow({ project }: { project: Project }) {
             </span>
           )}
         </h3>
-        <span className="text-xs text-muted whitespace-nowrap">{project.date}</span>
+        <span className="text-[11px] tracking-wide whitespace-nowrap" style={{ color: 'rgba(60,40,20,0.55)' }}>
+          {project.date}
+        </span>
       </div>
-      <p className="text-[11px] text-muted mb-1.5 font-mono">{project.stack}</p>
-      <p className="text-[14px] leading-snug text-foreground/80">{project.short}</p>
+      <p className="text-[11px] mb-2 font-mono" style={{ color: 'rgba(60,40,20,0.55)' }}>{project.stack}</p>
+      <p className="text-[15px] leading-relaxed" style={{ color: 'rgba(28,20,16,0.82)' }}>
+        {project.short}
+      </p>
       <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grid-rows-[1fr]">
         <div className="overflow-hidden">
-          <p className="text-[13px] leading-snug text-foreground/55 pt-1.5">
+          <p className="text-[14px] leading-relaxed pt-2" style={{ color: 'rgba(28,20,16,0.6)' }}>
             {project.long}
           </p>
         </div>
@@ -133,29 +137,29 @@ function ProjectRow({ project }: { project: Project }) {
       href={project.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block py-4"
+      className="group block py-5"
     >
       {inner}
     </a>
   ) : (
-    <div className="group block py-4">{inner}</div>
+    <div className="group block py-5">{inner}</div>
   );
 }
 
 export default function Projects() {
   return (
-    <div className="text-foreground">
-      <section className="mb-6">
-        <h1 className="text-2xl font-normal tracking-tight mb-2">projects</h1>
-        <p className="text-[15px] leading-snug text-foreground/80">
+    <div>
+      <section>
+        <h1>projects.</h1>
+        <p style={{ color: 'rgba(28,20,16,0.78)' }}>
           some things i&apos;ve built. hover for details.
         </p>
       </section>
-      <div>
+      <section>
         {PROJECTS.map((p) => (
           <ProjectRow key={p.name} project={p} />
         ))}
-      </div>
+      </section>
     </div>
   );
 }

@@ -6,7 +6,8 @@ function ExtLink({ href, children }: { href: string; children: ReactNode }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="underline decoration-foreground/30 underline-offset-[3px] hover:decoration-foreground transition-colors"
+      className="underline decoration-current/30 underline-offset-[4px] hover:decoration-current transition-colors"
+      style={{ color: 'inherit' }}
     >
       {children}
     </a>
@@ -15,12 +16,12 @@ function ExtLink({ href, children }: { href: string; children: ReactNode }) {
 
 function Section({ title, items }: { title: string; items: ReactNode[] }) {
   return (
-    <section className="mb-6">
-      <h2 className="text-xs uppercase tracking-widest text-muted mb-2">{title}</h2>
-      <ul className="space-y-1">
+    <section>
+      <h2>{title}</h2>
+      <ul>
         {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2 text-[15px] leading-snug">
-            <span className="text-muted select-none mt-[2px]">↳</span>
+          <li key={i} className="flex items-start gap-3">
+            <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
             <span>{item}</span>
           </li>
         ))}
@@ -31,10 +32,10 @@ function Section({ title, items }: { title: string; items: ReactNode[] }) {
 
 export default function About() {
   return (
-    <div className="text-foreground">
-      <section className="mb-8">
-        <h1 className="text-2xl font-normal tracking-tight mb-2">hi, i&apos;m ujaan.</h1>
-        <p className="text-[15px] leading-snug text-foreground/80">
+    <div>
+      <section>
+        <h1>hi, i&apos;m ujaan.</h1>
+        <p style={{ color: 'rgba(28,20,16,0.78)' }}>
           cs at <ExtLink href="https://www.gatech.edu/">georgia tech</ExtLink>. some
           trading on the side.
         </p>
