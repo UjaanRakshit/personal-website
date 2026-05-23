@@ -27,9 +27,9 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
       aria-orientation="vertical"
       ref={tablistRef}
       onKeyDown={onKeyDown}
-      className="absolute right-[-44px] top-12 flex flex-col gap-2 z-30"
+      className="binder-tabs"
     >
-      {SECTIONS.map((s) => {
+      {SECTIONS.map((s, i) => {
         const active = s.id === activeSection;
         return (
           <TransitionLink
@@ -41,6 +41,7 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
             className="binder-tab"
             data-active={active}
             style={{
+              top: `${72 + i * 128}px`,
               background: s.color,
               color: s.ink,
             }}
