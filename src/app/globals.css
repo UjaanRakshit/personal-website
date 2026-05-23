@@ -399,47 +399,50 @@ a {
 
 /* ============ binder page-flip (View Transitions) ============ */
 ::view-transition-group(binder-page) {
-  animation-duration: 720ms;
+  animation-duration: 760ms;
+  perspective: 700px;
+  perspective-origin: 50% 50%;
 }
 
 ::view-transition-old(binder-page) {
-  animation: book-flip-out 720ms cubic-bezier(0.55, 0, 0.45, 1) forwards;
+  animation: page-flip-out 400ms cubic-bezier(0.55, 0, 0.7, 0.3) forwards;
   transform-origin: left center;
   backface-visibility: hidden;
   z-index: 2;
+  will-change: transform;
 }
 
 ::view-transition-new(binder-page) {
-  animation: book-flip-in 360ms ease-out 360ms backwards;
+  animation: page-flip-in 400ms cubic-bezier(0.3, 0.7, 0.45, 1) 360ms backwards;
   transform-origin: left center;
+  backface-visibility: hidden;
   z-index: 1;
+  will-change: transform;
 }
 
-@keyframes book-flip-out {
+@keyframes page-flip-out {
   0% {
-    transform: perspective(1800px) rotateY(0deg);
+    transform: perspective(700px) rotateY(0deg) translateZ(0);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     filter: brightness(1);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  }
-  50% {
-    filter: brightness(0.92);
-    box-shadow: 18px 0 28px rgba(0, 0, 0, 0.28);
   }
   100% {
-    transform: perspective(1800px) rotateY(-180deg);
-    filter: brightness(0.6);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transform: perspective(700px) rotateY(-105deg) translateZ(50px);
+    box-shadow: 40px 18px 70px rgba(0, 0, 0, 0.55);
+    filter: brightness(0.7);
   }
 }
 
-@keyframes book-flip-in {
-  from {
-    opacity: 0;
-    transform: scale(0.985);
+@keyframes page-flip-in {
+  0% {
+    transform: perspective(700px) rotateY(105deg) translateZ(50px);
+    box-shadow: -40px 18px 70px rgba(0, 0, 0, 0.55);
+    filter: brightness(0.7);
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  100% {
+    transform: perspective(700px) rotateY(0deg) translateZ(0);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    filter: brightness(1);
   }
 }
 
