@@ -8,11 +8,14 @@ import Rings from './Rings';
 
 export default function DeskBinder(props: BinderProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center p-12">
-      <div className="binder relative" style={{ width: 880, maxWidth: '95vw' }}>
+    <div className="desk-stage h-screen overflow-hidden flex justify-center">
+      <div
+        className="binder relative"
+        style={{ width: 'min(880px, 95vw)', height: 'calc(100vh + 220px)', marginTop: 36 }}
+      >
         <Cover />
         <Rings />
-        <div className="relative">
+        <div className="relative h-full">
           <PageArea {...props} variant="desktop" />
           <SideTabs activeSection={props.activeSection} />
         </div>

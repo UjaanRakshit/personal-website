@@ -41,7 +41,7 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
             className="binder-tab"
             data-active={active}
             style={{
-              top: `${72 + i * 128}px`,
+              top: `calc(8% + ${i * 18}%)`,
               background: s.color,
               color: s.ink,
             }}
