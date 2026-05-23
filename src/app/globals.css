@@ -76,25 +76,62 @@ a {
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
-/* ============ binder ============ */
-.binder {
-  transform: rotate(-3deg);
-  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.45));
+/* ============ open book ============ */
+.open-book {
+  position: relative;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.5));
 }
 
-.binder-cover {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.06)),
-    radial-gradient(circle at 15% 50%, rgba(0,0,0,0.12), transparent 60%),
-    var(--cover);
+/* leather cover sits on the left half, base layer */
+.leather-cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  border-radius: 6px 0 0 6px;
+  background-color: #4a3020;
+  background-image:
+    radial-gradient(ellipse at 25% 30%, rgba(255, 245, 220, 0.06), transparent 55%),
+    radial-gradient(ellipse at 75% 70%, rgba(0, 0, 0, 0.25), transparent 60%),
+    repeating-linear-gradient(
+      35deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      -35deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    linear-gradient(140deg, #5d3d2a 0%, #3d2818 60%, #2a1a0e 100%);
   box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 2px 0 rgba(0,0,0,0.25);
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    inset 0 0 60px rgba(0, 0, 0, 0.45),
+    inset -12px 0 20px rgba(0, 0, 0, 0.55);
 }
 
-.binder-back {
-  background: var(--cover-dark);
+/* rings sit on the spine, between leather and paper */
+.binder-rings {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 28px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 0;
+  pointer-events: none;
 }
 
 /* ============ rings ============ */
@@ -125,21 +162,32 @@ a {
     linear-gradient(180deg, #faf4e9 0%, #f3ecdc 100%);
   color: #20160a;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  view-transition-name: binder-page;
 }
 
 .paper-page--desk {
-  margin-left: 64px;
-  margin-right: 24px;
-  height: calc(100vh - 80px);
-  min-height: 720px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  z-index: 3;
   border-radius: 2px 6px 6px 2px;
   box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,0.06),
-    0 1px 0 rgba(255,255,255,0.5) inset,
-    0 12px 24px -10px rgba(0,0,0,0.25);
-  padding: 56px 56px 56px 88px;
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 8px 0 24px -16px rgba(0, 0, 0, 0.45),
+    0 12px 24px -10px rgba(0, 0, 0, 0.3);
+  padding: 56px 60px 56px 56px;
   overflow: hidden;
+  view-transition-name: binder-page;
+}
+
+.paper-page--desk::before {
+  left: 32px;
+}
+
+.paper-page--desk::after {
+  display: none;
 }
 
 .paper-page--desk .paper-page__inner {
@@ -397,53 +445,48 @@ a {
   }
 }
 
-/* ============ binder page-flip (View Transitions) ============ */
+/* ============ binder page-flip (book turn) ============ */
 ::view-transition-group(binder-page) {
-  animation-duration: 760ms;
-  perspective: 700px;
-  perspective-origin: 50% 50%;
+  animation-duration: 820ms;
 }
 
 ::view-transition-old(binder-page) {
-  animation: page-flip-out 400ms cubic-bezier(0.55, 0, 0.7, 0.3) forwards;
+  animation: book-turn-out 820ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
   transform-origin: left center;
   backface-visibility: hidden;
-  z-index: 2;
+  z-index: 3;
   will-change: transform;
 }
 
 ::view-transition-new(binder-page) {
-  animation: page-flip-in 400ms cubic-bezier(0.3, 0.7, 0.45, 1) 360ms backwards;
+  animation: book-turn-reveal 420ms ease 400ms backwards;
   transform-origin: left center;
-  backface-visibility: hidden;
   z-index: 1;
-  will-change: transform;
 }
 
-@keyframes page-flip-out {
+@keyframes book-turn-out {
   0% {
-    transform: perspective(700px) rotateY(0deg) translateZ(0);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    filter: brightness(1);
+    transform: perspective(1500px) rotateY(0deg);
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 12px 24px -10px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+      24px 10px 36px rgba(0, 0, 0, 0.45);
   }
   100% {
-    transform: perspective(700px) rotateY(-105deg) translateZ(50px);
-    box-shadow: 40px 18px 70px rgba(0, 0, 0, 0.55);
-    filter: brightness(0.7);
+    transform: perspective(1500px) rotateY(-180deg);
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 0 0 rgba(0, 0, 0, 0);
   }
 }
 
-@keyframes page-flip-in {
-  0% {
-    transform: perspective(700px) rotateY(105deg) translateZ(50px);
-    box-shadow: -40px 18px 70px rgba(0, 0, 0, 0.55);
-    filter: brightness(0.7);
-  }
-  100% {
-    transform: perspective(700px) rotateY(0deg) translateZ(0);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    filter: brightness(1);
-  }
+@keyframes book-turn-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
