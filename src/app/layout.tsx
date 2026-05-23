@@ -3,8 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Header from "@/components/Header";
-import CommandBar from "@/components/CommandBar";
+import BinderShell from "@/components/binder/BinderShell";
 
 export const metadata: Metadata = {
   title: "Ujaan Rakshit",
@@ -22,16 +21,9 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex justify-center">
+      <body className="min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <main className="w-full max-w-[600px] px-6 py-14 md:py-20 pb-32">
-            <Header />
-            {children}
-          </main>
-          <CommandBar />
-          <p className="fixed bottom-3 right-4 text-xs text-muted/70 select-none pointer-events-none">
-            {new Date().getFullYear()} © ujaan rakshit
-          </p>
+          <BinderShell>{children}</BinderShell>
         </ThemeProvider>
       </body>
     </html>
