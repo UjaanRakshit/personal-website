@@ -33,10 +33,11 @@ export default function DeskBinder({ activeSection, content }: Props) {
                 key={s.id}
                 className="page"
                 aria-hidden={delta !== 0}
+                data-state={delta === 0 ? 'front' : flipped ? 'flipped' : 'underneath'}
                 style={{
                   transform: flipped ? 'rotateY(-180deg)' : 'rotateY(0deg)',
                   zIndex: 100 - Math.abs(delta),
-                  transitionDelay: `${Math.abs(delta) * 60}ms`,
+                  opacity: delta > 0 ? 0 : 1,
                 }}
               >
                 <div className="page-face page-front">
