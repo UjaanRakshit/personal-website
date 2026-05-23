@@ -1,6 +1,6 @@
 'use client';
 
-import TransitionLink from '@/components/TransitionLink';
+import Link from 'next/link';
 import { useRef, type KeyboardEvent } from 'react';
 import { SECTIONS, type Section } from '@/lib/sections';
 
@@ -32,7 +32,7 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
       {SECTIONS.map((s, i) => {
         const active = s.id === activeSection;
         return (
-          <TransitionLink
+          <Link
             key={s.id}
             href={s.href}
             role="tab"
@@ -47,7 +47,7 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
             }}
           >
             {s.label}
-          </TransitionLink>
+          </Link>
         );
       })}
     </div>

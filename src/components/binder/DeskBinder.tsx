@@ -1,24 +1,55 @@
 'use client';
 
-import type { BinderProps } from './types';
-import PageArea from './PageArea';
-import SideTabs from './SideTabs';
+import { SECTIONS, type Section } from '@/lib/sections';
 import Rings from './Rings';
+import SideTabs from './SideTabs';
 
-export default function DeskBinder(props: BinderProps) {
+type Props = {
+  activeSection: Section;
+  content: Record<Section, () => React.JSX.Element>;
+};
+
+export default function DeskBinder({ activeSection, content }: Props) {
+  const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
+
   return (
     <div className="desk-stage h-screen overflow-hidden flex justify-center pt-6">
       <div
-        className="open-book"
+        className="binder"
         style={{
-          width: 'min(1120px, 96vw)',
+          width: 'min(1600px, 96vw)',
           height: 'calc(100vh + 220px)',
         }}
       >
-        <div aria-hidden className="leather-cover" />
+        <div aria-hidden className="binder-cover" />
         <Rings />
-        <PageArea {...props} variant="desktop" />
-        <SideTabs activeSection={props.activeSection} />
+        <div className="pages-stack" role="tabpanel">
+          {SECTIONS.map((s, i) => {
+            const delta = i - activeIdx;
+            const Content = content[s.id];
+            const flipped = delta < 0;
+            return (
+              <div
+                key={s.id}
+                className="page"
+                aria-hidden={delta !== 0}
+                style={{
+                  transform: flipped ? 'rotateY(-180deg)' : 'rotateY(0deg)',
+                  zIndex: 100 - Math.abs(delta),
+                  transitionDelay: `${Math.abs(delta) * 60}ms`,
+                }}
+              >
+                <div className="page-face page-front">
+                  <div className="page-front-inner">
+                    <Content />
+                  </div>
+                </div>
+                <div aria-hidden className="page-face page-back" />
+              </div>
+            );
+          })}
+        </div>
+        <SideTabs activeSection={activeSection} />
       </div>
     </div>
   );

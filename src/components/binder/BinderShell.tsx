@@ -1,26 +1,28 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
-import { useMediaQuery, useReducedMotion } from '@/lib/hooks';
-import { sectionFromPath } from '@/lib/sections';
-import MobileBinder from './MobileBinder';
+import { useMediaQuery } from '@/lib/hooks';
+import { sectionFromPath, type Section } from '@/lib/sections';
+import About from '@/content/About';
+import Projects from '@/content/Projects';
+import Contact from '@/content/Contact';
 import DeskBinder from './DeskBinder';
+import MobileBinder from './MobileBinder';
 
-export default function BinderShell({ children }: { children: ReactNode }) {
+const CONTENT: Record<Section, () => React.JSX.Element> = {
+  about: About,
+  projects: Projects,
+  contact: Contact,
+};
+
+export default function BinderShell() {
   const pathname = usePathname();
   const activeSection = sectionFromPath(pathname);
-  const [query, setQuery] = useState('');
   const isDesktop = useMediaQuery('(min-width: 900px)');
-  const reducedMotion = useReducedMotion();
 
-  const shared = {
-    activeSection,
-    query,
-    setQuery,
-    reducedMotion,
-    children,
-  };
-
-  return isDesktop ? <DeskBinder {...shared} /> : <MobileBinder {...shared} />;
+  return isDesktop ? (
+    <DeskBinder activeSection={activeSection} content={CONTENT} />
+  ) : (
+    <MobileBinder activeSection={activeSection} content={CONTENT} />
+  );
 }

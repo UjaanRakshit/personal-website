@@ -23,7 +23,8 @@ export default function RootLayout({
     >
       <body className="min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <BinderShell>{children}</BinderShell>
+          <BinderShell />
+          <span hidden>{children}</span>
         </ThemeProvider>
       </body>
     </html>
