@@ -41,7 +41,10 @@ export default function DeskBinder({ activeSection, content }: Props) {
                 }}
               >
                 <div className="page-face page-front">
-                  <div className="page-front-inner">
+                  <div
+                    className="page-front-inner"
+                    key={delta === 0 ? `front-${activeSection}` : `idle-${s.id}`}
+                  >
                     <Content />
                   </div>
                 </div>
