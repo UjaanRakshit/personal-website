@@ -246,16 +246,6 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   font-size: 16px;
   line-height: 1.6;
   color: var(--foreground);
-  animation: page-content-emerge 360ms ease-out both;
-}
-
-@keyframes page-content-emerge {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-front-inner { animation: none; }
 }
 
 .page-front-inner::-webkit-scrollbar { width: 8px; }
