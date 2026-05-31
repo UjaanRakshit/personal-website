@@ -52,7 +52,8 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   position: relative;
   transform: rotate(-1.2deg);
   filter: drop-shadow(0 24px 28px rgba(50, 30, 10, 0.42));
-  --pw: min(940px, calc(100% - 520px));
+  --pw: 940px;
+  --page-right: 60px;
 }
 
 /* warm kraft cover */
@@ -80,7 +81,7 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(50% - var(--pw) / 2 - 22px);
+  right: calc(var(--page-right) + var(--pw) - 22px);
   width: 44px;
   background:
     linear-gradient(to right,
@@ -95,7 +96,7 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
 /* ============ rings as metal clasps ============ */
 .binder-rings {
   position: absolute;
-  left: calc(50% - var(--pw) / 2 - 16px);
+  right: calc(var(--page-right) + var(--pw) - 16px);
   top: 64px;
   bottom: 64px;
   width: 32px;
@@ -159,7 +160,7 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   position: absolute;
   top: 28px;
   bottom: 28px;
-  left: calc(50% - var(--pw) / 2);
+  right: var(--page-right);
   width: var(--pw);
   perspective: 2600px;
   perspective-origin: 0% 50%;

@@ -13,13 +13,14 @@ export default function DeskBinder({ activeSection, content }: Props) {
   const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
 
   return (
-    <div className="desk-stage h-screen overflow-hidden flex justify-center pt-6">
+    <div className="desk-stage h-screen overflow-hidden flex justify-end pt-6">
       <div
         className="binder"
         style={{
-          width: 'min(1900px, 112vw)',
-          height: 'calc(100vh + 360px)',
-          marginTop: '-120px',
+          width: 2200,
+          height: 'calc(100vh + 220px)',
+          flexShrink: 0,
+          marginRight: 40,
         }}
       >
         <div aria-hidden className="binder-cover" />
