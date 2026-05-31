@@ -99,12 +99,12 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
 /* ============ front cover that opens on first load ============ */
 .binder-front-cover {
   position: absolute;
-  top: 8px;
-  bottom: 8px;
-  right: calc(var(--page-right) - 22px);
-  width: calc(var(--pw) + 44px);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: calc(var(--pw) + var(--page-right) + 60px);
   z-index: 200;
-  border-radius: 2px 12px 12px 2px;
+  border-radius: 8px 14px 14px 8px;
   transform-origin: left center;
   background-color: #b88254;
   background-image:
