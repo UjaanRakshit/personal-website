@@ -6,7 +6,7 @@
   --background: #b78759;
   --foreground: #2c241b;
   --muted: #8a7257;
-  --accent: #b04438;
+  --accent: #d9b885;
 
   --paper-top: #fbf7ee;
   --paper-bot: #f7f1e3;
@@ -19,9 +19,7 @@
   --metal-light: #f6f6f8;
   --metal-mid: #b8b8bd;
   --metal-dark: #8a8a90;
-
-  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --metal-shade: #5a5a60;
 
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
 }
@@ -31,10 +29,11 @@ html { color-scheme: light; }
 body {
   background-color: #a47649;
   background-image:
-    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='240'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.18 0 0 0 0 0.08 0 0 0 0.30 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
-    radial-gradient(ellipse 90% 70% at 50% -10%, rgba(255, 230, 195, 0.4), transparent 65%),
-    linear-gradient(170deg, #b48457 0%, #9d6c3f 60%, #7e5430 100%);
-  background-size: 600px 240px, auto, auto;
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='240'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.18 0 0 0 0 0.08 0 0 0 0.32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 90% 70% at 50% -10%, rgba(255, 230, 195, 0.45), transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(60, 35, 15, 0.35), transparent 60%),
+    linear-gradient(170deg, #b48457 0%, #9d6c3f 55%, #7e5430 100%);
+  background-size: 600px 240px, auto, auto, auto;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   font-weight: 300;
@@ -44,28 +43,16 @@ body {
   min-height: 100vh;
 }
 
-::selection { background: rgba(217, 184, 133, 0.55); color: #2c241b; }
+::selection { background: var(--accent); color: #2c241b; }
 
-/* ============ desk stage ============ */
-.desk-stage {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
+a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1); }
 
-/* ============ binder ============ */
+/* ============ binder shell ============ */
 .binder {
   position: relative;
-  width: min(1280px, 92vw);
-  height: min(900px, 88vh);
-  transform: rotate(-1.2deg);
-  filter: drop-shadow(0 24px 32px rgba(50, 30, 10, 0.42));
-  --page-inset-left: 132px;
-  --page-inset-right: 60px;
-  --page-inset-top: 50px;
-  --page-inset-bot: 50px;
+  transform: rotate(-1.5deg);
+  filter: drop-shadow(0 24px 28px rgba(50, 30, 10, 0.42));
+  --pw: min(940px, calc(100% - 220px));
 }
 
 /* warm kraft cover */
@@ -73,18 +60,18 @@ body {
   position: absolute;
   inset: 0;
   z-index: 0;
-  border-radius: 10px 16px 16px 10px;
+  border-radius: 8px 14px 14px 8px;
   background-color: #b88254;
   background-image:
-    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3 1.3' numOctaves='2' seed='6'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 240, 210, 0.36), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 100%, rgba(80, 50, 25, 0.22), transparent 60%),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3 1.3' numOctaves='2' seed='6'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 235, 200, 0.32), transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(80, 50, 25, 0.25), transparent 60%),
     linear-gradient(180deg, var(--kraft-top) 0%, var(--kraft-mid) 55%, var(--kraft-bot) 100%);
   background-size: 320px 320px, auto, auto, auto;
   box-shadow:
-    inset 0 0 0 1px rgba(120, 80, 40, 0.32),
-    inset 0 2px 4px rgba(255, 235, 200, 0.2),
-    inset 0 -2px 6px rgba(60, 35, 15, 0.18);
+    inset 0 0 0 1px rgba(120, 80, 40, 0.35),
+    inset 0 2px 4px rgba(255, 235, 200, 0.18),
+    inset 0 -2px 6px rgba(60, 35, 15, 0.22);
 }
 
 /* spine shadow along the binding edge */
@@ -93,25 +80,25 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(var(--page-inset-left) - 22px);
+  left: calc(50% - var(--pw) / 2 - 22px);
   width: 44px;
   background:
     linear-gradient(to right,
       rgba(0, 0, 0, 0) 0%,
-      rgba(60, 35, 15, 0.14) 35%,
-      rgba(60, 35, 15, 0.22) 50%,
-      rgba(60, 35, 15, 0.14) 65%,
+      rgba(60, 35, 15, 0.18) 35%,
+      rgba(60, 35, 15, 0.28) 50%,
+      rgba(60, 35, 15, 0.18) 65%,
       rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
 }
 
-/* ============ metal clasp rings ============ */
+/* ============ rings as metal clasps ============ */
 .binder-rings {
   position: absolute;
-  left: calc(var(--page-inset-left) - 16px);
-  top: 90px;
-  bottom: 90px;
-  width: 28px;
+  left: calc(50% - var(--pw) / 2 - 16px);
+  top: 64px;
+  bottom: 64px;
+  width: 32px;
   z-index: 55;
   display: flex;
   flex-direction: column;
@@ -136,9 +123,11 @@ body {
     inset 0 -1px 0 rgba(0, 0, 0, 0.28),
     inset 1px 0 1px rgba(255, 255, 255, 0.4),
     inset -1px 0 1px rgba(0, 0, 0, 0.2),
-    0 2px 3px rgba(0, 0, 0, 0.35);
+    0 2px 3px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 245, 220, 0.1);
 }
 
+/* the dark slit at top of clasp (the opening) */
 .ring-clasp::before {
   content: '';
   position: absolute;
@@ -146,10 +135,13 @@ body {
   left: 24%;
   right: 24%;
   height: 2px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 100%);
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.25) 100%);
   border-radius: 2px;
 }
 
+/* hot specular highlight on top of clasp */
 .ring-clasp::after {
   content: '';
   position: absolute;
@@ -162,61 +154,62 @@ body {
   filter: blur(0.4px);
 }
 
-/* ============ single rotating page ============ */
-.binder-page-wrap {
+/* ============ pages stack (3D) ============ */
+.pages-stack {
   position: absolute;
-  top: var(--page-inset-top);
-  right: var(--page-inset-right);
-  bottom: var(--page-inset-bot);
-  left: var(--page-inset-left);
-  perspective: 1600px;
+  top: 28px;
+  bottom: 28px;
+  left: calc(50% - var(--pw) / 2);
+  width: var(--pw);
+  perspective: 2600px;
+  perspective-origin: 0% 50%;
   z-index: 5;
 }
 
-.binder-page {
+.page {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--paper-top) 0%, var(--paper-bot) 100%);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: left center;
+  transition:
+    transform 900ms cubic-bezier(0.45, 0, 0.55, 1),
+    opacity 120ms ease 440ms;
+  will-change: transform, opacity;
+}
+
+.page-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 2px 6px 6px 2px;
+  overflow: hidden;
+}
+
+.page-front {
+  background:
+    linear-gradient(180deg, var(--paper-top) 0%, var(--paper-bot) 100%);
   box-shadow:
     inset 0 0 0 1px rgba(80, 60, 30, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
     0 12px 24px -10px rgba(0, 0, 0, 0.28);
   color: var(--foreground);
-  transform-origin: left center;
-  transform: rotateY(0deg);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  transition: transform 240ms var(--ease-in);
-  will-change: transform;
 }
 
-.binder-page[data-phase='out'] {
-  transform: rotateY(-90deg);
-  transition: transform 240ms var(--ease-in);
-}
-
-.binder-page[data-phase='in'] {
-  transform: rotateY(0deg);
-  transition: transform 240ms var(--ease-out);
-}
-
-.binder-page[data-phase='idle'] {
-  transform: rotateY(0deg);
-  transition: none;
-}
-
-/* punch holes on the binder-page's left edge, matching ring positions */
-.binder-page::before {
+/* punch holes on left edge of the paper, aligned with rings */
+.page-front::before {
   content: '';
   position: absolute;
-  top: 40px;
-  bottom: 40px;
+  top: 64px;
+  bottom: 64px;
   left: 0;
-  width: 24px;
+  width: 22px;
   z-index: 3;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-image:
     radial-gradient(ellipse 9px 5px at 12px 0%, rgba(60, 40, 20, 0.32) 60%, transparent 100%),
     radial-gradient(ellipse 9px 5px at 12px 25%, rgba(60, 40, 20, 0.32) 60%, transparent 100%),
@@ -226,11 +219,11 @@ body {
 }
 
 /* red margin rule */
-.binder-page::after {
+.page-front::after {
   content: '';
   position: absolute;
-  top: 48px;
-  bottom: 48px;
+  top: 56px;
+  bottom: 56px;
   left: 72px;
   width: 1px;
   background: var(--rule);
@@ -238,17 +231,20 @@ body {
   z-index: 2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .binder-page {
-    transition: none !important;
-    transform: rotateY(0deg) !important;
-  }
+.page-back {
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f9f6ee 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(80, 60, 30, 0.08),
+    inset -6px 0 16px rgba(0, 0, 0, 0.06);
+  filter: blur(2.2px) brightness(0.95);
 }
 
 .page-front-inner {
   position: relative;
   height: 100%;
-  padding: 72px 84px 72px 104px;
+  padding: 80px 88px 80px 108px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(140, 110, 70, 0.3) transparent;
@@ -301,33 +297,17 @@ body {
 .page-front-inner ul { list-style: none; padding: 0; }
 .page-front-inner ul li + li { margin-top: 10px; }
 
-/* list rows: smooth eased nudge on hover */
+/* subtle hover on list rows */
 .page-front-inner ul li {
-  transition: transform 0.22s var(--ease-out), color 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .page-front-inner ul li:hover {
-  transform: translateX(3px);
-}
-
-/* animated underline + warm color shift on all in-page links */
-.page-front-inner a {
-  color: inherit;
-  text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  padding-bottom: 2px;
-  transition: background-size 0.22s var(--ease-out), color 0.2s ease;
-}
-.page-front-inner a:hover {
-  background-size: 100% 1px;
-  color: var(--accent);
+  transform: translateX(2px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-front-inner ul li { transition: color 0.2s ease !important; transform: none !important; }
-  .page-front-inner a { transition: color 0.2s ease !important; background-size: 100% 1px !important; }
+  .page { transition-duration: 120ms !important; transform: none !important; }
+  .page-front-inner ul li { transition: none !important; transform: none !important; }
 }
 
 /* ============ side tabs ============ */
@@ -352,8 +332,8 @@ body {
   justify-content: center;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  width: 38px;
-  height: 92px;
+  padding: 26px 9px;
+  min-height: 96px;
   font-size: 12.5px;
   letter-spacing: 0.08em;
   text-transform: lowercase;
@@ -363,16 +343,17 @@ body {
   user-select: none;
   transform: translateX(0);
   transition:
-    transform 0.22s var(--ease-out),
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1),
     filter 0.18s ease,
     box-shadow 0.22s ease;
   box-shadow:
     inset 0 0 0 1px rgba(0, 0, 0, 0.1),
     inset 2px 0 0 rgba(255, 255, 255, 0.28),
     inset -1px 0 0 rgba(0, 0, 0, 0.08),
-    3px 4px 8px -2px rgba(0, 0, 0, 0.32);
+    3px 4px 8px -2px rgba(0, 0, 0, 0.35);
 }
 
+/* small flap that tucks under the cover at the left side of the tab */
 .binder-tab::before {
   content: '';
   position: absolute;
@@ -412,7 +393,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .binder-tab { transition: none !important; }
+  .binder-tab {
+    transition: none !important;
+  }
 }
 
 /* ============ mobile chrome ============ */
@@ -444,7 +427,7 @@ body {
   background: var(--accent, transparent);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 220ms var(--ease-out);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .binder-top-tab[data-active='true'] { color: #fbf7ee; }
 .binder-top-tab[data-active='true']::after { transform: scaleX(1); }

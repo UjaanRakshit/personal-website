@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import type { Section } from '@/lib/sections';
+import { SECTIONS, type Section } from '@/lib/sections';
 import Rings from './Rings';
 import SideTabs from './SideTabs';
 
@@ -10,65 +9,49 @@ type Props = {
   content: Record<Section, () => React.JSX.Element>;
 };
 
-const FLIP_HALF = 240;
-
 export default function DeskBinder({ activeSection, content }: Props) {
-  const [displayed, setDisplayed] = useState<Section>(activeSection);
-  const [phase, setPhase] = useState<'idle' | 'out' | 'in'>('idle');
-  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-
-  useEffect(() => {
-    if (activeSection === displayed) return;
-
-    timersRef.current.forEach(clearTimeout);
-    timersRef.current = [];
-
-    if (
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
-      setDisplayed(activeSection);
-      setPhase('idle');
-      return;
-    }
-
-    setPhase('out');
-
-    const t1 = setTimeout(() => {
-      setDisplayed(activeSection);
-      setPhase('in');
-    }, FLIP_HALF);
-
-    const t2 = setTimeout(() => {
-      setPhase('idle');
-    }, FLIP_HALF * 2);
-
-    timersRef.current = [t1, t2];
-
-    return () => {
-      timersRef.current.forEach(clearTimeout);
-      timersRef.current = [];
-    };
-  }, [activeSection, displayed]);
-
-  const Content = content[displayed];
+  const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
 
   return (
-    <div className="desk-stage">
-      <div className="binder">
+    <div className="desk-stage h-screen overflow-hidden flex justify-center pt-6">
+      <div
+        className="binder"
+        style={{
+          width: 'min(1600px, 96vw)',
+          height: 'calc(100vh + 220px)',
+        }}
+      >
         <div aria-hidden className="binder-cover" />
         <Rings />
-        <div className="binder-page-wrap">
-          <div
-            className="binder-page"
-            data-phase={phase}
-            role="tabpanel"
-            aria-label={`${displayed} section`}
-          >
-            <div className="page-front-inner" key={displayed}>
-              <Content />
-            </div>
-          </div>
+        <div className="pages-stack" role="tabpanel">
+          {SECTIONS.map((s, i) => {
+            const delta = i - activeIdx;
+            const Content = content[s.id];
+            const flipped = delta < 0;
+            return (
+              <div
+                key={s.id}
+                className="page"
+                aria-hidden={delta !== 0}
+                data-state={delta === 0 ? 'front' : flipped ? 'flipped' : 'underneath'}
+                style={{
+                  transform: flipped ? 'rotateY(-180deg)' : 'rotateY(0deg)',
+                  zIndex: 100 - Math.abs(delta),
+                  opacity: delta > 0 ? 0 : 1,
+                }}
+              >
+                <div className="page-face page-front">
+                  <div
+                    className="page-front-inner"
+                    key={delta === 0 ? `front-${activeSection}` : `idle-${s.id}`}
+                  >
+                    <Content />
+                  </div>
+                </div>
+                <div aria-hidden className="page-face page-back" />
+              </div>
+            );
+          })}
         </div>
         <SideTabs activeSection={activeSection} />
       </div>

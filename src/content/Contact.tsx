@@ -2,7 +2,13 @@ import type { ReactNode } from 'react';
 
 function ExtLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline decoration-current/30 underline-offset-[4px] hover:decoration-current transition-colors"
+      style={{ color: 'inherit' }}
+    >
       {children}
     </a>
   );
