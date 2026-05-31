@@ -173,8 +173,8 @@ function ProjectRow({ project }: { project: Project }) {
 
 export default function Projects() {
   return (
-    <div>
-      <section>
+    <div className="flex flex-col h-full">
+      <section className="shrink-0 pb-6">
         <h1>projects.</h1>
         <p
           className="italic"
@@ -183,7 +183,10 @@ export default function Projects() {
           selected work. hover any entry for the full notes.
         </p>
       </section>
-      <section>
+      <section
+        className="grow overflow-y-auto pr-3 -mr-3"
+        style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(140, 110, 70, 0.3) transparent' }}
+      >
         {PROJECTS.map((p) => (
           <ProjectRow key={p.name} project={p} />
         ))}
