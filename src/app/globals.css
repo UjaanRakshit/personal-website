@@ -50,9 +50,9 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
 /* ============ binder shell ============ */
 .binder {
   position: relative;
-  transform: rotate(-1.5deg);
+  transform: rotate(-1.2deg);
   filter: drop-shadow(0 24px 28px rgba(50, 30, 10, 0.42));
-  --pw: min(940px, calc(100% - 220px));
+  --pw: min(940px, calc(100% - 520px));
 }
 
 /* warm kraft cover */
