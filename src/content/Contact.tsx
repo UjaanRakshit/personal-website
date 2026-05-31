@@ -23,7 +23,7 @@ export default function Contact() {
           className="italic"
           style={{ color: 'rgba(80, 55, 30, 0.78)', fontFamily: 'var(--serif)', fontSize: '17px' }}
         >
-          easiest way to reach me is email. i answer most of them within a day.
+          email is the fastest. i usually reply within a day.
         </p>
       </section>
 
@@ -33,20 +33,20 @@ export default function Contact() {
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
             <span>
-              email me at{' '}
+              email{' '}
               <span className="font-mono text-[15px]">rakshitujaan[at]gmail[dot]com</span>
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
             <span>
-              find me on <ExtLink href="https://linkedin.com/in/ujaan-rakshit">linkedin</ExtLink>
+              connect on <ExtLink href="https://linkedin.com/in/ujaan-rakshit">linkedin</ExtLink>
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
             <span>
-              browse my code on{' '}
+              read code on{' '}
               <ExtLink href="https://github.com/ujaanrakshit">github</ExtLink>
             </span>
           </li>
@@ -54,19 +54,19 @@ export default function Contact() {
       </section>
 
       <section>
-        <h2>good things to email me about</h2>
+        <h2>worth reaching out about</h2>
         <ul>
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
-            <span>internships and roles for summer 2026 and beyond</span>
+            <span>internship and full-time roles for summer 2026 and beyond</span>
           </li>
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
-            <span>low-latency systems, ml infra, trading projects</span>
+            <span>collaborations on low-latency systems, ml infrastructure, or research</span>
           </li>
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
-            <span>anything you want a second pair of eyes on</span>
+            <span>anything you&apos;d like a second pair of eyes on</span>
           </li>
         </ul>
       </section>

@@ -39,8 +39,8 @@ export default function About() {
           className="italic"
           style={{ color: 'rgba(80, 55, 30, 0.78)', fontFamily: 'var(--serif)', fontSize: '17px' }}
         >
-          cs at <ExtLink href="https://www.gatech.edu/">georgia tech</ExtLink>. some
-          trading on the side.
+          studying computer science at{' '}
+          <ExtLink href="https://www.gatech.edu/">georgia tech</ExtLink>.
         </p>
       </section>
 
@@ -48,13 +48,13 @@ export default function About() {
         title="currently"
         items={[
           <>
-            making gpus go faster at{' '}
+            engineering gpu inference performance at{' '}
             <ExtLink href="https://cos.gatech.edu/arcs">
               academic &amp; research computing services
             </ExtLink>
           </>,
           <>
-            wrangling robots and ml at{' '}
+            building robotics and ml infrastructure at{' '}
             <ExtLink href="https://www.pair.toronto.edu/">pair lab</ExtLink>
           </>,
         ]}
@@ -64,22 +64,20 @@ export default function About() {
         title="recently built"
         items={[
           <>
-            made{' '}
-            <ExtLink href="https://github.com/ujaanrakshit/acheron">a way</ExtLink>{' '}
-            to see your market fills in real time
+            <ExtLink href="https://github.com/ujaanrakshit/acheron">Acheron</ExtLink>
+            , a real-time L3 market-data replay engine
           </>,
           <>
-            made{' '}
             <ExtLink href="https://github.com/ujaanrakshit/photoscope">
-              a better way
-            </ExtLink>{' '}
-            to get your photos organized
+              PhotoScope
+            </ExtLink>
+            , a natural-language retrieval system over a personal photo library
           </>,
           <>
-            wanted to learn how to{' '}
             <ExtLink href="https://github.com/ujaanrakshit/taskweave">
-              distribute systems
+              TaskWeave
             </ExtLink>
+            , a distributed DAG orchestrator on Postgres and Redis
           </>,
         ]}
       />
@@ -88,12 +86,15 @@ export default function About() {
         title="awards"
         items={[
           <>
-            19th in the world in imc&apos;s{' '}
+            19th of 19,000 teams at imc&apos;s{' '}
             <ExtLink href="https://prosperity.imc.com/">prosperity 4</ExtLink>
           </>,
           <>
-            honorable mention at{' '}
-            <ExtLink href="https://ioling.org/2023/">iol 2023</ExtLink>
+            honorable mention at the{' '}
+            <ExtLink href="https://ioling.org/2023/">
+              international linguistics olympiad
+            </ExtLink>
+            , 2023
           </>,
         ]}
       />

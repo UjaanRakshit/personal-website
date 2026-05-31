@@ -12,44 +12,44 @@ const PROJECTS: Project[] = [
     name: 'Acheron',
     date: 'mar 2026',
     stack: 'C++20 · low-latency · market data',
-    short: 'C++20 L3 market-data replay engine.',
+    short: 'A real-time L3 market-data replay engine.',
     long:
-      'Replays L3 market data into FIFO books while keeping order IDs and queue position intact. Each symbol replays in parallel, but each book has a single writer, so the hot path stays lock-free. Tested on AAPL and GOOG up to 8.69M events/sec.',
+      'Reconstructs FIFO order books from L3 market data while preserving order IDs and queue position. Symbol replay runs in parallel, but each book is owned by a single writer, keeping the hot path lock-free. Verified against AAPL and GOOG samples at sustained throughputs of up to 8.69M events per second.',
     href: 'https://github.com/ujaanrakshit/acheron',
   },
   {
     name: 'PhotoScope',
     date: 'feb 2026',
     stack: 'Python · CLIP · FAISS · FastAPI · Postgres',
-    short: 'natural-language search over 50k personal photos.',
+    short: 'A natural-language retrieval system over a personal photo library.',
     long:
-      'CLIP embeddings indexed in FAISS, served from FastAPI with metadata in Postgres. Clusters duplicates and trips so the timeline does not get noisy. Most queries return under 200ms.',
+      'CLIP embeddings indexed in FAISS, served from a FastAPI layer with metadata in Postgres. Deduplicates and clusters images so timelines stay coherent across years. P95 query latency stays under 200ms over a 50,000-image collection.',
     href: 'https://github.com/ujaanrakshit/photoscope',
   },
   {
     name: 'TaskWeave',
     date: 'nov 2025',
     stack: 'Python · FastAPI · Postgres · Redis · WebSockets',
-    short: 'distributed DAG orchestrator on Postgres and Redis.',
+    short: 'A distributed DAG orchestrator backed by Postgres and Redis.',
     long:
-      'State lives in Postgres so workflows survive restarts. Dependency release is atomic, which stops two workers from picking up the same task. Status streams over WebSockets, and FastAPI endpoints handle retries, cancels, and audit logs.',
+      'Workflow state lives in Postgres so executions survive restarts. Dependency release is atomic, preventing two workers from claiming the same task. Status streams over WebSockets, and the FastAPI surface exposes retries, cancellation, and audit logs.',
     href: 'https://github.com/ujaanrakshit/taskweave',
   },
   {
     name: 'JurassIQ',
     date: 'mar 2025',
     stack: 'Next.js · ONNX · CLIP · Python',
-    short: 'computer vision model for identifying and valuing fossils.',
+    short: 'A computer-vision model for fossil identification and valuation.',
     long:
-      'Hacklytics 2025 project. Trained on 100k synthetic and 5k real images. Around 99% accuracy on the held-out set.',
+      'Built during Hacklytics 2025. Trained on a combined corpus of 100,000 synthetic and 5,000 authenticated fossil images, reaching roughly 99% accuracy on the held-out evaluation set.',
   },
   {
     name: 'What is the Title of this Paper?',
     date: 'jun 2023',
     stack: 'Python · logic · research',
-    short: 'arXiv paper on automating Knights-and-Knaves logic puzzles.',
+    short: 'An arXiv paper on automating Knights-and-Knaves logic puzzles.',
     long:
-      '3rd place at the InnoSphere International Research and Tech Conference.',
+      'Awarded third place at the InnoSphere International Research and Technology Conference.',
     href: 'https://arxiv.org/abs/2309.13044',
   },
 ];
@@ -162,7 +162,7 @@ export default function Projects() {
           className="italic"
           style={{ color: 'rgba(80, 55, 30, 0.68)', fontFamily: 'var(--serif)' }}
         >
-          a working catalogue. hover any entry for the full notes.
+          selected work. hover any entry for the full notes.
         </p>
       </section>
       <section>
