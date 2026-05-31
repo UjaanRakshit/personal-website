@@ -1,9 +1,9 @@
 export type Section = 'about' | 'projects' | 'contact';
 
 export const SECTIONS: { id: Section; label: string; href: string; color: string; ink: string }[] = [
-  { id: 'about', label: 'about', href: '/', color: '#e8c9a0', ink: '#5b4022' },
-  { id: 'projects', label: 'projects', href: '/projects', color: '#c9a0e8', ink: '#3f1f6b' },
-  { id: 'contact', label: 'contact', href: '/contact', color: '#a0c9e8', ink: '#1f3f6b' },
+  { id: 'about', label: 'about', href: '/', color: '#d9b885', ink: '#4a3318' },
+  { id: 'projects', label: 'projects', href: '/projects', color: '#b8a3c9', ink: '#3a2a55' },
+  { id: 'contact', label: 'contact', href: '/contact', color: '#a3bdc9', ink: '#2a3f55' },
 ];
 
 export function sectionFromPath(pathname: string): Section {

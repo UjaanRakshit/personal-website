@@ -29,7 +29,7 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
       onKeyDown={onKeyDown}
       className="binder-tabs"
     >
-      {SECTIONS.map((s, i) => {
+      {SECTIONS.map((s) => {
         const active = s.id === activeSection;
         return (
           <Link
@@ -41,7 +41,6 @@ export default function SideTabs({ activeSection }: { activeSection: Section }) 
             className="binder-tab"
             data-active={active}
             style={{
-              top: `calc(8% + ${i * 18}%)`,
               background: s.color,
               color: s.ink,
             }}
