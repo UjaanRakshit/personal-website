@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { SECTIONS, type Section } from '@/lib/sections';
 import Rings from './Rings';
 import SideTabs from './SideTabs';
@@ -9,8 +10,27 @@ type Props = {
   content: Record<Section, () => React.JSX.Element>;
 };
 
+const FLIP_HALF = 450;
+
 export default function DeskBinder({ activeSection, content }: Props) {
   const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
+  const [shown, setShown] = useState<Section>(activeSection);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (activeSection === shown) return;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setShown(activeSection);
+      timerRef.current = null;
+    }, FLIP_HALF);
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [activeSection, shown]);
 
   return (
     <div className="desk-stage h-screen overflow-hidden flex justify-end pt-6">
@@ -42,8 +62,8 @@ export default function DeskBinder({ activeSection, content }: Props) {
                 }}
               >
                 <div className="page-face page-front">
-                  {delta === 0 && (
-                    <div className="page-front-inner" key={`front-${activeSection}`}>
+                  {s.id === shown && (
+                    <div className="page-front-inner" key={`shown-${shown}`}>
                       <Content />
                     </div>
                   )}
