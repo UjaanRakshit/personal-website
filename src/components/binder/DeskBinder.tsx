@@ -21,6 +21,7 @@ const FOLIO: Record<Section, string> = {
 export default function DeskBinder({ activeSection, content }: Props) {
   const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
   const [shown, setShown] = useState<Section>(activeSection);
+  const [coverOpened, setCoverOpened] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -38,6 +39,11 @@ export default function DeskBinder({ activeSection, content }: Props) {
     };
   }, [activeSection, shown]);
 
+  useEffect(() => {
+    const t = setTimeout(() => setCoverOpened(true), 1700);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="desk-stage h-screen overflow-hidden flex justify-end pt-6">
       <div
@@ -50,6 +56,11 @@ export default function DeskBinder({ activeSection, content }: Props) {
         }}
       >
         <div aria-hidden className="binder-cover" />
+        <div
+          aria-hidden
+          className="binder-front-cover"
+          data-opened={coverOpened ? 'true' : 'false'}
+        />
         <Rings />
         <div className="pages-stack" role="tabpanel">
           {SECTIONS.map((s, i) => {
