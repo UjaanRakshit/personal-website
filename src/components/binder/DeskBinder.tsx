@@ -39,6 +39,7 @@ export default function DeskBinder({ activeSection, content }: Props) {
                 style={{
                   transform: flipped ? 'rotateY(-180deg)' : 'rotateY(0deg)',
                   zIndex: 100 - Math.abs(delta),
+                  opacity: delta > 0 ? 0 : 1,
                 }}
               >
                 <div className="page-face page-front">
