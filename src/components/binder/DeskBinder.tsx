@@ -48,6 +48,7 @@ export default function DeskBinder({ activeSection, content }: Props) {
     <div className="desk-stage h-screen overflow-hidden flex justify-end pt-6">
       <div
         className="binder"
+        data-cover-opened={coverOpened ? 'true' : 'false'}
         style={{
           width: 2200,
           height: 'calc(100vh + 220px)',
