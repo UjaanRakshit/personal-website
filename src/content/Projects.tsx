@@ -9,6 +9,24 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    name: 'Pyre',
+    date: 'may 2026',
+    stack: 'CUDA · C++ · Python · quant',
+    short: 'A GPU Monte Carlo engine for options pricing and portfolio risk.',
+    long:
+      'Computes Value-at-Risk, Expected Shortfall, and Greeks under Black-Scholes and Heston dynamics. Single-precision CUDA kernels are validated against deterministic CPU oracles and FFT references, with scrambled Sobol quasi-Monte Carlo cutting variance up to 2,000,000×. A 10,000-position, 50-underlying Black-Scholes VaR clears in ~130ms on an RTX 4060.',
+    href: 'https://github.com/UjaanRakshit/pyre',
+  },
+  {
+    name: 'Lethe',
+    date: 'apr 2026',
+    stack: 'C++20 · Python · gRPC · RDMA · vLLM',
+    short: 'A distributed KV cache for large-scale LLM serving.',
+    long:
+      'Shards prefix-aware blocks across nodes using consistent hashing with R=2 replication, layered across HBM, DRAM, and SSD. Validated against vLLM’s native prefix cache for token-for-token equivalence. When working sets exceed single-node capacity, the native cache collapses to 0% hit rate while Lethe sustains 85–99%.',
+    href: 'https://github.com/UjaanRakshit/lethe',
+  },
+  {
     name: 'Acheron',
     date: 'mar 2026',
     stack: 'C++20 · low-latency · market data',
