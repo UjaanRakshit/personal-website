@@ -248,6 +248,9 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   font-size: 16px;
   line-height: 1.6;
   color: var(--foreground);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .page-front-inner::-webkit-scrollbar { width: 8px; }
