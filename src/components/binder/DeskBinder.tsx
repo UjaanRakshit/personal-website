@@ -20,7 +20,7 @@ export default function DeskBinder({ activeSection, content }: Props) {
           width: 2200,
           height: 'calc(100vh + 220px)',
           flexShrink: 0,
-          marginRight: 40,
+          marginRight: 'max(0px, calc(50vw - 530px))',
         }}
       >
         <div aria-hidden className="binder-cover" />
