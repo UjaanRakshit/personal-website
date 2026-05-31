@@ -248,6 +248,20 @@ a { transition: color 0.18s ease, transform 0.22s cubic-bezier(0.22, 0.61, 0.36,
   color: var(--foreground);
 }
 
+/* roman page folio in the lower-right corner */
+.page-front-inner::after {
+  content: attr(data-folio);
+  position: absolute;
+  bottom: 36px;
+  right: 56px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(120, 90, 50, 0.5);
+  pointer-events: none;
+}
+
 .page-front-inner::-webkit-scrollbar { width: 8px; }
 .page-front-inner::-webkit-scrollbar-thumb {
   background: rgba(140, 110, 70, 0.25);

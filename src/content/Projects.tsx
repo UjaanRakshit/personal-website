@@ -114,7 +114,10 @@ function ProjectRow({ project }: { project: Project }) {
             </span>
           )}
         </h3>
-        <span className="text-[11px] tracking-wide whitespace-nowrap" style={{ color: 'rgba(60,40,20,0.55)' }}>
+        <span
+          className="text-[13px] italic whitespace-nowrap"
+          style={{ color: 'rgba(80, 55, 30, 0.65)', fontFamily: 'var(--serif)' }}
+        >
           {project.date}
         </span>
       </div>
@@ -137,12 +140,18 @@ function ProjectRow({ project }: { project: Project }) {
       href={project.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block py-5"
+      className="group block py-5 border-b border-dashed last:border-0"
+      style={{ borderColor: 'rgba(120, 90, 50, 0.18)' }}
     >
       {inner}
     </a>
   ) : (
-    <div className="group block py-5">{inner}</div>
+    <div
+      className="group block py-5 border-b border-dashed last:border-0"
+      style={{ borderColor: 'rgba(120, 90, 50, 0.18)' }}
+    >
+      {inner}
+    </div>
   );
 }
 
@@ -151,8 +160,11 @@ export default function Projects() {
     <div>
       <section>
         <h1>projects.</h1>
-        <p style={{ color: 'rgba(28,20,16,0.78)' }}>
-          some things i&apos;ve built. hover for details.
+        <p
+          className="italic"
+          style={{ color: 'rgba(80, 55, 30, 0.68)', fontFamily: 'var(--serif)' }}
+        >
+          a working catalogue. hover any entry for the full notes.
         </p>
       </section>
       <section>

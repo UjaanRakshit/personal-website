@@ -12,6 +12,12 @@ type Props = {
 
 const FLIP_HALF = 450;
 
+const FOLIO: Record<Section, string> = {
+  about: 'I',
+  projects: 'II',
+  contact: 'III',
+};
+
 export default function DeskBinder({ activeSection, content }: Props) {
   const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
   const [shown, setShown] = useState<Section>(activeSection);
@@ -63,7 +69,11 @@ export default function DeskBinder({ activeSection, content }: Props) {
               >
                 <div className="page-face page-front">
                   {s.id === shown && (
-                    <div className="page-front-inner" key={`shown-${shown}`}>
+                    <div
+                      className="page-front-inner"
+                      key={`shown-${shown}`}
+                      data-folio={FOLIO[shown]}
+                    >
                       <Content />
                     </div>
                   )}

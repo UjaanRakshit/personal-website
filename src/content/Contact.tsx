@@ -19,7 +19,10 @@ export default function Contact() {
     <div>
       <section>
         <h1>say hi.</h1>
-        <p style={{ color: 'rgba(28,20,16,0.78)' }}>
+        <p
+          className="italic"
+          style={{ color: 'rgba(80, 55, 30, 0.78)', fontFamily: 'var(--serif)', fontSize: '17px' }}
+        >
           easiest way to reach me is email. i answer most of them within a day.
         </p>
       </section>

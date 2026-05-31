@@ -35,7 +35,10 @@ export default function About() {
     <div>
       <section>
         <h1>hi, i&apos;m ujaan.</h1>
-        <p style={{ color: 'rgba(28,20,16,0.78)' }}>
+        <p
+          className="italic"
+          style={{ color: 'rgba(80, 55, 30, 0.78)', fontFamily: 'var(--serif)', fontSize: '17px' }}
+        >
           cs at <ExtLink href="https://www.gatech.edu/">georgia tech</ExtLink>. some
           trading on the side.
         </p>
