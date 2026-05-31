@@ -125,12 +125,10 @@ function ProjectRow({ project }: { project: Project }) {
       <p className="text-[15px] leading-relaxed" style={{ color: 'rgba(28,20,16,0.82)' }}>
         {project.short}
       </p>
-      <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grid-rows-[1fr]">
-        <div className="overflow-hidden">
-          <p className="text-[14px] leading-relaxed pt-2" style={{ color: 'rgba(28,20,16,0.6)' }}>
-            {project.long}
-          </p>
-        </div>
+      <div className="overflow-hidden max-h-0 group-hover:max-h-[400px] transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        <p className="text-[14px] leading-relaxed pt-2" style={{ color: 'rgba(28,20,16,0.6)' }}>
+          {project.long}
+        </p>
       </div>
     </>
   );
