@@ -1,180 +1,84 @@
-# Personal Portfolio Website
+# personal-website
 
-A modern, responsive portfolio website built with Next.js 15, featuring advanced animations, dynamic backgrounds, and a professional design.
+A skeuomorphic ring-binder portfolio. On first load a closed kraft folder opens, lays its front cover flat on the desk, and reveals paper pages that flip in real 3D between sections. Built in Next.js 15 with no animation library underneath: every gradient, shadow, page rotation, and material is pure CSS.
 
-## 🚀 Features
+[Quickstart](#quickstart) | [Highlights](#highlights) | [Architecture](#architecture) | [Project Layout](#project-layout) | [Build & Deploy](#build--deploy)
 
-- **Text Scrambling Animation**: Unique scrambling effect for the name display with session storage to prevent repeated animations
-- **Dynamic Background**: Floating particle system with subtle animations
-- **Fluid UI Components**: Smooth hover effects and transitions throughout
-- **Responsive Design**: Optimized for all screen sizes
-- **Professional Content**: Showcasing Georgia Tech Computer Science background
-- **Inline Contact System**: Expandable contact buttons with Email, LinkedIn, and GitHub links
-- **Modern Tech Stack**: Built with the latest web technologies
+## Highlights
 
-## 🛠️ Tech Stack
+- **Real 3D page flips.** `transform-style: preserve-3d`, perspective camera, 900 ms cubic-bezier rotation around the spine, with the content swap pinned to the edge-on midpoint so mirrored text never appears on either face.
+- **Direction-aware turns.** Forward flips rotate the outgoing page away to the left; backward flips spin the incoming page back from the left. Words stay attached to the page they belong to.
+- **Cover that opens once.** On mount the kraft front cover rotates from `0deg` to `-180deg` over 1.5 s, then drops its z-index so subsequent flipped pages stack on top of it the way real divider pages stack on an open binder.
+- **Authentic binder materials.** Kraft cover from layered SVG fractal-noise + gradient passes, paper grain on the page faces, red margin rule, embossed punch holes, five brushed-steel clasps from pure CSS radial-gradient + box-shadow.
+- **Tabs flush to the page edge** with no visible seam. They sit static across navigations so any section is always one click away.
+- **Hover-expand project rows** driven by a single `max-height` transition; the underline beneath each title morphs into a GitHub icon (or external-link arrow) on hover via overlapping `group-hover` transforms.
+- **Independent scrolling on the Projects page** so the heading stays pinned while the entry list scrolls within the paper.
+- **Roman folios, italic serif dates, dashed dividers** between project entries — small typographic details that lean on the binder metaphor without ever feeling decorative.
+- **`prefers-reduced-motion` respected** end to end: rotations collapse to a 1-frame snap, hover transitions short-circuit to color-only.
 
-- **Framework**: Next.js 15 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Fonts**: Roboto (weights 100-900)
-- **Icons**: Heroicons (SVG)
+Stack: Next.js 15 (App Router) · TypeScript · Tailwind CSS. No Framer Motion, no GSAP, no three.js. CSS for everything visual.
 
-## 📁 Project Structure
+## Quickstart
+
+```sh
+npm install
+npm run dev
+# open http://localhost:3000
+```
+
+Production build:
+
+```sh
+npm run build
+npm start
+```
+
+## Architecture
+
+The binder is a small controlled state machine.
+
+- `activeSection` is read from `usePathname` — every nav click is a real route change to `/`, `/projects`, or `/contact`.
+- `shown` mirrors `activeSection` with a 450 ms delay so the React content swap lands exactly when the page is edge-on at `rotateY(-90deg)`.
+- Each of the three pages renders in 3D space at a `rotateY` derived from `delta = pageIdx - activeIdx`. `delta < 0` pages sit at `-180deg` on the left, `delta > 0` pages stack at `0deg` behind the front one, and `delta === 0` is the active page.
+- The front cover is a separate layer that runs the opening animation once on mount, then settles into a low z-index so subsequent flipped pages can lay on top of it.
+- Mobile (`< 900px`) skips the 3D scene entirely and renders the active section's content in a single paper card with a horizontal tab strip — same content modules, no rotation.
+
+## Project Layout
 
 ```
 src/
-├── app/
-│   ├── page.tsx              # Homepage with text scrambling and contact expansion
-│   ├── layout.tsx            # Root layout with fonts and dynamic background
-│   ├── globals.css           # Global styles and animations
-│   ├── about/               # About Me page with photo integration
-│   ├── portfolio/           # Portfolio projects showcase
-│   ├── skills/             # Skills with dot-based proficiency system
-│   └── contact/            # Contact page (legacy)
+├── app/                          Next.js routes; thin shells, the binder owns rendering
+│   ├── page.tsx                  /        → about section
+│   ├── projects/page.tsx         /projects
+│   ├── contact/page.tsx          /contact
+│   ├── layout.tsx                root layout, wires the BinderShell
+│   └── globals.css               every CSS variable, gradient, keyframe, and transform
 ├── components/
-│   ├── TextScramble.tsx    # Text scrambling animation component
-│   └── DynamicBackground.tsx # Floating particles background
-public/
-├── Resume2108.pdf          # Resume file
-└── ujaan-photo.jpg        # Personal photo
+│   └── binder/
+│       ├── BinderShell.tsx       routes the active section into the right shell
+│       ├── DeskBinder.tsx        desktop scene, page-stack state machine, cover animation
+│       ├── MobileBinder.tsx      mobile card layout
+│       ├── Rings.tsx             five metal clasps
+│       ├── SideTabs.tsx          right-edge tabs flush to the page
+│       └── TopTabs.tsx           mobile horizontal tab strip
+├── content/                      section content modules (independent of routing)
+│   ├── About.tsx
+│   ├── Projects.tsx
+│   └── Contact.tsx
+└── lib/
+    ├── sections.ts               section metadata (id, label, href, tab color)
+    ├── hooks.ts                  useMediaQuery, useReducedMotion
+    └── searchIndex.ts            flat index of every section's items
 ```
 
-## 🎨 Design Features
+## Build & Deploy
 
-### Homepage
-- Large text scrambling animation for name display
-- Three-line professional description
-- Clean vertical navigation menu
-- Inline contact expansion with animated buttons
-- Floating particle background
-- Professional footer with copyright
+Vercel-ready out of the box; nothing exotic in `next.config.ts`. No required environment variables.
 
-### Navigation
-- **About Me**: Personal background and Georgia Tech focus
-- **Portfolio**: Real projects with status badges (Completed/In Progress)
-- **Skills**: Dot-based proficiency indicators for technical skills
-- **Resume**: Direct PDF download link
-- **Contact**: Inline expansion with Email, LinkedIn, GitHub
-
-### Skills Categories
-- **Programming Languages**: Python, Java, JavaScript, TypeScript, C++, HTML/CSS
-- **AI/ML Frameworks**: TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy
-- **Data Handling**: SQL, MongoDB, Excel, R
-- **Other Tools**: Git, Docker, AWS, React, Node.js
-
-### Portfolio Projects
-- **Photo Organizer**: AI-powered photo management system
-- **JurassIQ**: Machine learning project for dinosaur classification
-- **Knights-and-Knaves**: Research project in computational logic
-- **Portfolio Website**: This website itself
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/UjaanRakshit/personal-website.git
-   cd personal-website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-- **Desktop**: Full-size layout with large text and spacing
-- **Tablet**: Medium-sized text and adjusted spacing
-- **Mobile**: Compact layout with touch-friendly buttons
-
-## 🎭 Animations
-
-- **Text Scrambling**: Custom scrambling effect for name display
-- **Framer Motion**: Smooth page transitions and element animations
-- **Hover Effects**: Interactive button and link animations
-- **Background Particles**: Subtle floating elements
-- **Contact Expansion**: Smooth reveal animation for contact buttons
-
-## 🔧 Customization
-
-### Updating Content
-- **Personal Info**: Edit variables in `src/app/page.tsx`
-- **About Me**: Update content in `src/app/about/page.tsx`
-- **Portfolio**: Modify projects in `src/app/portfolio/page.tsx`
-- **Skills**: Update proficiency levels in `src/app/skills/page.tsx`
-
-### Styling
-- **Colors**: Modify Tailwind classes in component files
-- **Fonts**: Update font imports in `src/app/layout.tsx`
-- **Animations**: Customize Framer Motion settings in components
-
-## 📄 Resume Integration
-
-The website includes direct PDF resume integration:
-- Place your resume PDF in the `public/` directory
-- Update the resume link in the navigation menu
-- The resume opens in a new tab for easy viewing/downloading
-
-## 📸 Photo Integration
-
-Personal photo integration in the About Me section:
-- Add your photo to `public/ujaan-photo.jpg`
-- Responsive image with proper alt text
-- Professional styling with subtle effects
-
-## 🌐 Deployment
-
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically on push
-
-### Other Platforms
-- **Netlify**: Connect GitHub repo for auto-deployment
-- **GitHub Pages**: Use `npm run build` and deploy static files
-
-## 🤝 Contributing
-
-This is a personal portfolio project, but suggestions and improvements are welcome!
-
-1. Fork the project
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
-## 📞 Contact
-
-**Ujaan Rakshit**
-- Email: [ujaanrakshit@gmail.com](mailto:ujaanrakshit@gmail.com)
-- LinkedIn: [ujaan-rakshit](https://www.linkedin.com/in/ujaan-rakshit-18508b281/)
-- GitHub: [UjaanRakshit](https://github.com/ujaanrakshit)
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
+```sh
+npm run build
+```
 
 ---
 
-## 🎓 About
-
-This portfolio represents my journey as a Computer Science student at Georgia Tech, class of 2027. Currently seeking internship opportunities for Summer 2026.
-
-**Built with ❤️ by Ujaan Rakshit**
+Built by [Ujaan Rakshit](https://github.com/UjaanRakshit).
