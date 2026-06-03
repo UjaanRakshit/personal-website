@@ -64,20 +64,16 @@ export default function About() {
         title="recently built"
         items={[
           <>
-            <ExtLink href="https://github.com/ujaanrakshit/acheron">Acheron</ExtLink>
+            <ExtLink href="https://github.com/UjaanRakshit/kharon">Kharon</ExtLink>
+            , a GPT that trains, serves, and RL-tunes itself on hand-written kernels
+          </>,
+          <>
+            <ExtLink href="https://github.com/UjaanRakshit/acheron">Acheron</ExtLink>
             , a real-time L3 market-data replay engine
           </>,
           <>
-            <ExtLink href="https://github.com/ujaanrakshit/photoscope">
-              PhotoScope
-            </ExtLink>
-            , a natural-language retrieval system over a personal photo library
-          </>,
-          <>
-            <ExtLink href="https://github.com/ujaanrakshit/taskweave">
-              TaskWeave
-            </ExtLink>
-            , a distributed DAG orchestrator on Postgres and Redis
+            <ExtLink href="https://github.com/UjaanRakshit/nyx">Nyx</ExtLink>
+            , a tactics map where humans and an AI are the same kind of client
           </>,
         ]}
       />
@@ -86,8 +82,11 @@ export default function About() {
         title="awards"
         items={[
           <>
-            19th of 19,000 teams at imc&apos;s{' '}
+            19th globally, 7th in the USA at imc&apos;s{' '}
             <ExtLink href="https://prosperity.imc.com/">prosperity 4</ExtLink>
+          </>,
+          <>
+            6th in the HRT and Partcl macro placement challenge
           </>,
           <>
             honorable mention at the{' '}

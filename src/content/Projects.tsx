@@ -9,54 +9,80 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    name: 'Pyre',
-    date: 'mar 2026',
-    stack: 'CUDA · C++ · Python · quant',
-    short: 'A GPU Monte Carlo engine for options pricing and portfolio risk.',
+    name: 'Kharon',
+    date: 'may 2026',
+    stack: 'cuda · c · llm infra',
+    short: 'A GPT that trains, serves, and RL-tunes itself on hand-written kernels.',
     long:
-      'Computes Value-at-Risk, Expected Shortfall, and Greeks under Black-Scholes and Heston dynamics. Single-precision CUDA kernels are validated against deterministic CPU oracles and FFT references, with scrambled Sobol quasi-Monte Carlo cutting variance up to 2,000,000×. A 10,000-position, 50-underlying Black-Scholes VaR clears in ~130ms on an RTX 4060.',
-    href: 'https://github.com/UjaanRakshit/pyre',
+      'A from-scratch C and CUDA stack with no deep-learning framework underneath, only NCCL and cuBLAS. It trains a 1.2B-parameter model across eight GPUs with composed tensor, pipeline, and ZeRO-1 parallelism, serves it through a paged-KV inference engine, and closes the loop with a GRPO reinforcement-learning trainer. Every kernel is verified against PyTorch, bit-exact where it can be.',
+    href: 'https://github.com/UjaanRakshit/kharon',
+  },
+  {
+    name: 'JaneRT Placer',
+    date: 'may 2026',
+    stack: 'gpu · optimization · physical design',
+    short: 'A GPU macro-placement engine that optimizes the real objective, not a proxy.',
+    long:
+      'Built for the HRT and Partcl macro placement challenge. A byte-exact GPU surrogate of the official scoring function, with Adam descent driven straight on it, eigenvector-deflation saddle escape, and a deliberately diversified multi-seed pool. The decisive idea was treating soft macros as discrete actors under multi-epoch coordinate descent. Finished 6th against named industry and academic teams.',
+  },
+  {
+    name: 'IMC Prosperity 4',
+    date: 'apr 2026',
+    stack: 'python · algorithmic trading · market making',
+    short: '19th of 18,000+ in a global algorithmic trading competition.',
+    long:
+      "JaneRT's full run through IMC Prosperity 4, a two-week contest spanning market making, options pricing, regime detection, and a 50-product final universe. The edge came from modeling the mechanism before trading it: a hard sum-to-50,000 invariant for fair-value arbitrage, an implied-vol surface solved per strike, and bot-trader behaviour reverse-engineered from order flow. Finished 19th globally, 7th in the USA.",
+    href: 'https://github.com/UjaanRakshit/imc-prosperity-4',
   },
   {
     name: 'Acheron',
     date: 'mar 2026',
-    stack: 'C++20 · low-latency · market data',
+    stack: 'c++ · low-latency · market data',
     short: 'A real-time L3 market-data replay engine.',
     long:
-      'Reconstructs FIFO order books from L3 market data while preserving order IDs and queue position. Symbol replay runs in parallel, but each book is owned by a single writer, keeping the hot path lock-free. Verified against AAPL and GOOG samples at sustained throughputs of up to 8.69M events per second.',
-    href: 'https://github.com/ujaanrakshit/acheron',
+      'Reconstructs FIFO order books from L3 market data while preserving order IDs and queue position. Symbol replay runs in parallel, but each book is owned by a single writer, keeping the hot path lock-free. Validated against AAPL and GOOG, where it also quantifies exactly where exact replay breaks down (the orders a top-of-book feed never declares) at sustained throughputs up to 8.69M events per second.',
+    href: 'https://github.com/UjaanRakshit/acheron',
+  },
+  {
+    name: 'Pyre',
+    date: 'mar 2026',
+    stack: 'cuda · c++ · quant finance',
+    short: 'A GPU Monte Carlo engine for option risk, calibrated to live markets.',
+    long:
+      'Prices equity options and computes portfolio VaR under Black-Scholes and Heston dynamics on hand-written CUDA kernels, with every GPU result checked against an analytic, CPU, or FFT reference. Scrambled Sobol paths cut variance by up to six orders of magnitude, and a live calibration loop fits the Heston surface to real option chains. A 10K-position, 50-underlying VaR clears in ~106ms on a consumer RTX 4060.',
+    href: 'https://github.com/UjaanRakshit/pyre',
   },
   {
     name: 'Lethe',
     date: 'feb 2026',
-    stack: 'C++20 · Python · gRPC · RDMA · vLLM',
-    short: 'A distributed KV cache for large-scale LLM serving.',
+    stack: 'distributed systems · c++ · llm infra',
+    short: 'A distributed KV cache that serves more than any single GPU can hold.',
     long:
-      'Shards prefix-aware blocks across nodes using consistent hashing with R=2 replication, layered across HBM, DRAM, and SSD. Validated against vLLM’s native prefix cache for token-for-token equivalence. When working sets exceed single-node capacity, the native cache collapses to 0% hit rate while Lethe sustains 85–99%.',
+      "Shards prefix-aware KV blocks across a three-node cluster, replicates them for single-failure tolerance, and tiers them across HBM, DRAM, and SSD, exposed to vLLM as an external cache layer. Where one node's prefix cache collapses past its memory budget, Lethe holds an 85 to 99% hit rate, survives node death with zero data loss, and verifies every hit token-for-token. gRPC by default, with a hand-written RDMA path on InfiniBand.",
     href: 'https://github.com/UjaanRakshit/lethe',
   },
   {
-    name: 'PhotoScope',
-    date: 'feb 2026',
-    stack: 'Python · CLIP · FAISS · FastAPI · Postgres',
-    short: 'A natural-language retrieval system over a personal photo library.',
+    name: 'Nyx',
+    date: 'nov 2025',
+    stack: 'typescript · go · crdt',
+    short: 'A real-time tactics map where humans and an AI are the same kind of client.',
     long:
-      'CLIP embeddings indexed in FAISS, served from a FastAPI layer with metadata in Postgres. Deduplicates and clusters images so timelines stay coherent across years. P95 query latency stays under 200ms over a 50,000-image collection.',
-    href: 'https://github.com/ujaanrakshit/photoscope',
+      "Every actor (a human's drag, an autonomous agent, an LLM proposal) perceives the world through one from-scratch line-of-sight engine and crosses one validation boundary before touching shared state, all over a hand-written CRDT with no library beneath it. An autonomous wraith hunts whatever it can see while you fight back, blind around corners. The CRDT converges byte-identically under chaos, and a Go relay stays pinned to the TypeScript core by a cross-language conformance suite.",
+    href: 'https://github.com/UjaanRakshit/nyx',
   },
   {
-    name: 'TaskWeave',
-    date: 'nov 2025',
-    stack: 'Python · FastAPI · Postgres · Redis · WebSockets',
-    short: 'A distributed DAG orchestrator backed by Postgres and Redis.',
+    name: 'Erebus',
+    date: 'oct 2025',
+    stack: 'python · distributed systems · postgres',
+    short: 'A durable, multi-tenant workflow engine built on Postgres alone.',
     long:
-      'Workflow state lives in Postgres so executions survive restarts. Dependency release is atomic, preventing two workers from claiming the same task. Status streams over WebSockets, and the FastAPI surface exposes retries, cancellation, and audit logs.',
-    href: 'https://github.com/ujaanrakshit/taskweave',
+      'Runs workflows as DAGs of tasks where Postgres is both the source of truth and the work queue: atomic claims, leased execution, and a reaper that recovers any task a dead worker abandons. Durable timers let a run sleep for a day without holding a thread, and every state change streams live to the browser. Ships from one image to a live URL, green across 155 backend tests.',
+    href: 'https://github.com/UjaanRakshit/erebus',
   },
   {
     name: 'JurassIQ',
     date: 'mar 2025',
-    stack: 'Next.js · ONNX · CLIP · Python',
+    stack: 'next.js · onnx · clip · python',
     short: 'A computer-vision model for fossil identification and valuation.',
     long:
       'Built during Hacklytics 2025. Trained on a combined corpus of 100,000 synthetic and 5,000 authenticated fossil images, reaching roughly 99% accuracy on the held-out evaluation set.',
@@ -64,7 +90,7 @@ const PROJECTS: Project[] = [
   {
     name: 'What is the Title of this Paper?',
     date: 'jun 2023',
-    stack: 'Python · logic · research',
+    stack: 'python · logic · research',
     short: 'An arXiv paper on automating Knights-and-Knaves logic puzzles.',
     long:
       'Awarded third place at the InnoSphere International Research and Technology Conference.',
