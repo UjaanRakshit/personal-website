@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useState, type ReactNode } from 'react';
 
 function ExtLink({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -11,6 +13,39 @@ function ExtLink({ href, children }: { href: string; children: ReactNode }) {
     >
       {children}
     </a>
+  );
+}
+
+const EMAIL = 'rakshitujaan' + '@' + 'gmail.com';
+
+function CopyEmail() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="copy-email font-mono text-[15px]"
+      title="click to copy"
+    >
+      rakshitujaan[at]gmail[dot]com
+      <span className={`copy-stamp ${copied ? 'copy-stamp--on' : ''}`} aria-hidden={!copied}>
+        copied ✓
+      </span>
+      <span className="sr-only" aria-live="polite">
+        {copied ? 'email copied to clipboard' : ''}
+      </span>
+    </button>
   );
 }
 
@@ -33,8 +68,7 @@ export default function Contact() {
           <li className="flex items-start gap-3">
             <span aria-hidden className="select-none mt-[6px] text-[12px] opacity-50">↳</span>
             <span>
-              email{' '}
-              <span className="font-mono text-[15px]">rakshitujaan[at]gmail[dot]com</span>
+              email <CopyEmail />
             </span>
           </li>
           <li className="flex items-start gap-3">
