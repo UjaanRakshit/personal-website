@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useMediaQuery } from '@/lib/hooks';
 import { sectionFromPath, type Section } from '@/lib/sections';
 import About from '@/content/About';
 import Projects from '@/content/Projects';
@@ -18,11 +17,19 @@ const CONTENT: Record<Section, () => React.JSX.Element> = {
 export default function BinderShell() {
   const pathname = usePathname();
   const activeSection = sectionFromPath(pathname);
-  const isDesktop = useMediaQuery('(min-width: 900px)');
 
-  return isDesktop ? (
-    <DeskBinder activeSection={activeSection} content={CONTENT} />
-  ) : (
-    <MobileBinder activeSection={activeSection} content={CONTENT} />
+  // Both layouts render and CSS picks one, so the server-rendered HTML is
+  // already correct for the viewport. The old useMediaQuery approach painted
+  // the mobile card first on desktop, then swapped to the binder after
+  // hydration.
+  return (
+    <>
+      <div className="hidden min-[900px]:block">
+        <DeskBinder activeSection={activeSection} content={CONTENT} />
+      </div>
+      <div className="min-[900px]:hidden">
+        <MobileBinder activeSection={activeSection} content={CONTENT} />
+      </div>
+    </>
   );
 }
